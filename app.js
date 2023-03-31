@@ -7,7 +7,10 @@ const _=require("lodash");
 const mongoose = require("mongoose");
 const { strict } = require("assert");
 const app = express();
- 
+
+require('dotenv').config();
+const uri = process.env.MONGODB_URI;
+
 app.set("view engine", "ejs");
  
 app.use(
@@ -21,8 +24,8 @@ app.use(express.static("public"));
 // mongoose.connect("mongodb://127.0.0.1:27018/todolistDB" );
 
 // this code connects your code to mongoDB's atlas cluster that you made
-mongoose.connect("mongodb+srv://admin_Oz:test%2D123@cluster0.hqwjoqp.mongodb.net/todolistDB?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
-    
+mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
+
 // mongoose (Schema)
 const itemsSchema = {
   name: String,
